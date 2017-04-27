@@ -37,6 +37,9 @@
 </head>
 <body>
 <?php
+require_once 'DZ1.php';
+require_once 'DZ2.php';
+require_once 'DZ3.php';
 require_once 'DZ4.php';
 ?>
 <div style="width: 300px; height: 500px;"></div>
