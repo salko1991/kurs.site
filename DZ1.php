@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php
+		echo '<h3>DZ1</h3>';
 		$euroRate_fl = 28.88; // Курс евро
 		$moneyQuantity_fl = 10.99; // Сумма для обмена в грувнах
 		$resultMoney_fl = round($euroRate_fl * $moneyQuantity_fl, 2); // Делаем расчет итоговая сумма в гривнах

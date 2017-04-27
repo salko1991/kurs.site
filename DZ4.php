@@ -1,5 +1,6 @@
 <br />
 <?php
+echo '<h3>DZ4</h3>';
 //1
 function drawTable($col = 10, $row = 10, $color = '#c299ef', $even = true) {
 	echo "<table>";

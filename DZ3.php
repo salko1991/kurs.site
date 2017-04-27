@@ -1,4 +1,5 @@
 <?php
+echo '<h3>DZ3</h3>';
 //Задача 1
 echo '<h3>Задача 1</h3>';
 echo '<table>';

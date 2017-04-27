@@ -55,6 +55,7 @@
 </head>
 <body>
 <?php
+echo '<h3>DZ2</h3>';
 // Задача1
 $hour_int = (int)strftime('%H');
 $welcome = '';
