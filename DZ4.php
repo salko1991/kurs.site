@@ -133,6 +133,5 @@ function getCategories($categories) {
 }
 getCategories($categories_data1);
 getCategories($new_categories);
-
 //4
 ?>
