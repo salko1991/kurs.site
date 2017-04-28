@@ -52,7 +52,7 @@ function buildCategories(&$categories_data, $categoryItem = null) {
 				unset($categories_data[$key]);
 				buildCategories($categories_data, $category);
 			} elseif (!is_null($categoryItem) && $category->id == $categoryItem->parent_id) {
-				$category->subcategories[] = $categoryItem;
+				$category->subcategories[] = $categoryItem; return;
 			} elseif (isset($category->subcategories) && !empty($category->subcategories)) {
 				buildCategories($category->subcategories, $categoryItem);
 			}
