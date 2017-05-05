@@ -72,91 +72,11 @@
     </style>
 </head>
 <body>
-<?php
-//Задача 6
-//echo '<h3>Задача 6</h3>';
-require_once 'pagesArray.php';
-require_once 'productsArray.php';
-//Задача 6
-?>
 <div class="container-fluid">
-<!--menu-->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
-          <ul class="nav navbar-nav">
-            <?php foreach($dataPages_arr as $page) { ?>
-				<?php if((int)$page->visible == 1 && (int)$page->menu_id == 1){ ?>
-					<li><a href="<?php echo ($page->url)?$page->url:'index.php'; ?>"><?php echo $page->name; ?></a></li>
-				<?php } ?>
-			<?php } ?>
-          </ul>
-        </div>
-      </div>
-    </nav>
-<!--menu-->
-
+	<?php require_once 'page/menu.php'; ?>
 	<div class="row-fluid">
-		<div class="allCart">
-			<span class="glyphicon glyphicon-shopping-cart cartImage"></span>
-			<div class="cartText">
-				<div><strong>Корзина</strong></div>
-				<div>Корзина пуста</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row-fluid">
-		<div class="col-sm-2 col-md-2 col-lg-2 hidden-xs">
-			<div class="btn-group categoriesGroupButon">
-			  <button type="button" class="btn btn-info dropdown-toggle categoriesButton" data-toggle="dropdown">Категории <span class="caret"></span></button>
-			  <ul class="dropdown-menu" role="menu">
-			    <li><a href="#">Категория1</a></li>
-			    <li><a href="#">Категория2</a></li>
-			    <li><a href="#">Категория3</a></li>
-			    <li><a href="#">Категория4</a></li>
-			  </ul>
-			</div>
-			<div class="emptyBlock"></div>
-			<div class="filterColor">
-				<input type="checkbox" id="all" name="all" checked="checked" class="marginLeft"><label for="all">Все</label><br />
-				<input type="checkbox" id="connect" name="connect" class="marginLeft"><label for="connect">Connect</label>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<a href="">Главная ></a> Детские товары<br />
-				<h3>Детские товары</h3>
-			</div>
-
-			<div class="row-fluid">
-				<?php foreach($dataProducts_arr as $product) { ?>
-					<?php if((int)$product->visible == 1){ ?>
-					  <div class="col-xs-6 col-sm-6 col-md-4 productMinWidth">
-					    <div class="thumbnail productMinHeight">
-					   	  <div class="productDate"><?= date_create($product->created)->Format('d.m.Y'); ?></div>
-					      <img src="generator.png" data-src="holder.js/300x200" alt="<?= $product->name; ?>">
-					      <div class="caption">
-					        <h5 class="productTextCenter"><a href="<?= $product->url; ?>"><?= $product->name; ?></a></h5>
-					        <h4 class="productTextCenter"><?= $product->variants[0]->price; ?> грн.</h4>
-					        <p class="productTextCenter">На складе <?= $product->variants[0]->stock; ?> штук</p>
-					        <p class="notShow"><a href="#" class="btn btn-primary" role="button">Кнопка</a> <a href="#" class="btn btn-default" role="button">Кнопка</a></p>
-					      </div>
-					    </div>
-					  </div>
-					<?php } ?>
-				<?php } ?>
-			</div>
-		</div>
+		<?php require_once 'page/block_left.php'; ?>
+		<?php require_once 'page/content.php'; ?>
 	</div>
 </div>
 </body>
