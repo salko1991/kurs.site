@@ -103,7 +103,7 @@ foreach ($dataProducts_arr as $key => $product1) {
 					</div>
 					<div class="col-xs-12 col-sm-5 col-md-4 col-lg-4" style="border: 0px solid black;">
 						<p>Цена: <?php echo reset($product1->variants)->price; ?> Грн.</p>
-						<p>Код продукта: <?php echo reset($product1->variants)->product_id; ?> Грн.</p>
+						<p>Код продукта: <?php echo reset($product1->variants)->product_id; ?></p>
 						<p> И прочая инфа </p>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 0px solid black;">
