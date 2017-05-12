@@ -34,7 +34,7 @@ if (file_exists('pagesArray.php')) {
       <span class="glyphicon glyphicon-shopping-cart cartImage"></span>
       <div class="cartText">
         <div><strong>Корзина</strong></div>
-        <div>Корзина пуста</div>
+        <div><?php echo ($count>0)?"$count товар(ов)":'Корзина пуста'; ?></div>
       </div>
     </div>
   </div>

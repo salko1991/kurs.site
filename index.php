@@ -1,3 +1,7 @@
+<?php
+session_start();
+session_name($_SERVER['HTTP_USER_AGENT']);
+?>
 <!DOCTYPE HTML>
 <html>
 <head>

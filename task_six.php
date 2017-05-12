@@ -1,3 +1,33 @@
+<?php
+setcookie('HTTP_REFERER', isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'Прямой переход!', time() + 3600, '/');
+setcookie('REQUEST_TIME', date('Y.m.d H:i:s', $_SERVER['REQUEST_TIME']), time() + 3600, '/');
+if (isset($_COOKIE['cart'])) {
+	$cart = unserialize($_COOKIE['cart']);
+} else {
+	$cart = array();
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
+		$product_id = $_POST['product_id'];
+		$quantity = (int)$_POST['quantity'];
+		if ($quantity < 1) $quantity = 1;
+		if (!empty($cart) && array_key_exists($product_id, $cart)) {
+			$cart[$product_id] += $quantity;
+		} else {
+			$cart[$product_id] = $quantity;
+		}
+		setcookie('cart', serialize($cart), time() + 3600, '/');
+	}
+}
+if (!empty($cart)) {
+	$count = 0;
+	foreach ($cart as $key => $value) {
+		$count += $value;
+	}
+} else {
+	$count = 0;
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -79,5 +109,9 @@
 		<?php require_once 'page/content.php'; ?>
 	</div>
 </div>
+<?php
+echo 'Предыдущая страница: '.(isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'Прямой переход!').'<br />';
+echo 'Дата посещения: '.date('Y.m.d H:i:s', $_SERVER['REQUEST_TIME']);
+?>
 </body>
 </html>

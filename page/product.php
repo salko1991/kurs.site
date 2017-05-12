@@ -1,3 +1,31 @@
+<?php
+if (isset($_COOKIE['cart'])) {
+	$cart = unserialize($_COOKIE['cart']);
+} else {
+	$cart = array();
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
+		$product_id = $_POST['product_id'];
+		$quantity = (int)$_POST['quantity'];
+		if ($quantity < 1) $quantity = 1;
+		if (!empty($cart) && array_key_exists($product_id, $cart)) {
+			$cart[$product_id] += $quantity;
+		} else {
+			$cart[$product_id] = $quantity;
+		}
+		setcookie('cart', serialize($cart), time() + 3600, '/');
+	}
+}
+if (!empty($cart)) {
+	$count = 0;
+	foreach ($cart as $key => $value) {
+		$count += $value;
+	}
+} else {
+	$count = 0;
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -105,6 +133,11 @@ foreach ($dataProducts_arr as $key => $product1) {
 						<p>Цена: <?php echo reset($product1->variants)->price; ?> Грн.</p>
 						<p>Код продукта: <?php echo reset($product1->variants)->product_id; ?></p>
 						<p> И прочая инфа </p>
+						<form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+							<input type="hidden" name="product_id" value="<?php echo reset($product1->variants)->product_id; ?>">
+							<input type="number" name="quantity" min="1" step="1" value="1">
+							<input type="submit" name="submit" value="Купить">
+						</form>
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 0px solid black;">
 						<h3>Описание:</h3>
