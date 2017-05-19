@@ -1,52 +1,52 @@
 <?php
-session_start();
-session_name($_SERVER['HTTP_USER_AGENT']);
-?>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Курсы</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+if (file_exists('config.php')) {
+	require_once('config.php');
+}
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+//Libraries
+//print_r(DIR_LOGS);
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-    	table {
-    		border-collapse: collapse; /* Убираем двойные линии между ячейками */
-   		}
-	    td, th {
-	    	padding: 3px; /* Поля вокруг содержимого таблицы */
-	    	border: 1px solid black; /* Параметры рамки */
-	    	text-align: center;
-	    	width: 20px;
-	    	height: 20px;
-	    }
-	    .tdBlack {
-	    	background-color: #000000;
-	    }
-	    label {
-	    	cursor: pointer;
-	    }
-	    .marginLeft {
-	    	margin-left: 10px!important;
-	    }
-    </style>
-</head>
-<body>
-<?php
-/*require_once 'DZ1.php';
-require_once 'DZ2.php';
-require_once 'DZ3.php';
-require_once 'DZ4.php';*/
-require_once 'register.php';
+function error_handler($errno, $errstr, $errfile, $errline) {
+	global $log, $config;
+	$handle = fopen(DIR_LOGS, 'a');
+	switch ($errno) {
+		case E_NOTICE:
+		case E_USER_NOTICE:
+			$error = 'Notice';
+			break;
+		case E_WARNING:
+		case E_USER_WARNING:
+			$error = 'Warning';
+			break;
+		case E_ERROR:
+		case E_USER_ERROR:
+			$error = 'Fatal Error';
+			break;
+		default:
+			$error = 'Unknown';
+			break;
+	}
+	if (in_array($errno,array(E_USER_NOTICE,E_USER_WARNING,E_USER_ERROR))) {
+		/*if ($config->get('config_error_display')) {
+			echo '<b>' . $error . '</b>: ' . $errstr . ' in <b>' . $errfile . '</b> on line <b>' . $errline . '</b>';
+		}
+		
+		if ($config->get('config_error_log')) {*/
+			//$log->write('PHP ' . $error . ':  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
+			
+			
+			fwrite($handle, 'PHP ' . $error . ':  ' . print_r($errstr, true) . ' in ' . $errfile . ' on line ' . $errline . PHP_EOL);
+		//}
+	}
+
+	return true;
+}
+	
+// Error Handler
+set_error_handler('error_handler');
+$a = array(1,2,3,4,5,6,7,8,9,0);
+//trigger_error(print_r($a, true));
+//trigger_error('qwertyuiop');
+
+require_once 'files.php';
 ?>
-<div style="width: 300px; height: 500px;"></div>
-</body>
-</html>
