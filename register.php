@@ -63,7 +63,7 @@ echo '<h3>HTTP task1</h3><br />';
 		width: 200px;
 	}
 </style>
-<form method="post" action="index.php">
+<form method="post" action="register.php">
 	<table class="table5">
 		<tr>
 			<td><label>Имя</label></td>

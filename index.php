@@ -48,5 +48,6 @@ $a = array(1,2,3,4,5,6,7,8,9,0);
 //trigger_error(print_r($a, true));
 //trigger_error('qwertyuiop');
 
-require_once 'files.php';
+//require_once 'files.php';
+require_once 'regexp.php';
 ?>
